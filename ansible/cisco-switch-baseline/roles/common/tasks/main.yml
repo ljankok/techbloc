@@ -1,0 +1,9 @@
+---
+- name: ensure common configuration exists
+  ios_template:
+    src: common.j2
+    username: "{{ username }}"
+    password: "{{ password }}"
+    host: "{{ device_ip }}"
+  notify:
+    - write config
