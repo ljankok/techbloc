@@ -1,4 +1,4 @@
-- name: Ensure basic configuration of switches
+- name: Cisco baseline configuration 
   connection: local
   hosts: ios 
   gather_facts: false
