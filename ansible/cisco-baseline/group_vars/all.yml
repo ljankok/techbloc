@@ -1,6 +1,6 @@
 ---
-username: "username"
-password: "password"
-secret: "password"
-logserver: 192.168.1.5
+username: "ansible"
+password: "cisco"
+secret: "cisco"
+logserver: 192.168.1.100
 mgmt_vlanid: 1

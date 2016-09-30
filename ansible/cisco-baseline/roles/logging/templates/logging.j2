@@ -1,5 +1,7 @@
-logging buffered 128000
+service timestamps debug datetime msec localtime
+service timestamps log datetime msec localtime
+logging buffered 4096 
 no logging console
 no logging monitor
-logging {{ logserver }}
-logging source-interface Vlan{{ mgmt_vlanid }}
+logging trap notification
+logging host {{ logserver }} 
