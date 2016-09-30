@@ -1,2 +1,3 @@
 [ios]
 rtr01 device_ip=192.168.100.130
+rtr02 device_ip=192.168.100.132
