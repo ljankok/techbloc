@@ -1,5 +1,5 @@
 ---
-- name: ensure logging configuration exists
+- name: Deploys logging and ntp configuration 
   ios_template:
     src: logging.j2
     username: "{{ username }}"
