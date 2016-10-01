@@ -8,3 +8,9 @@
       tags: common
     - role: logging
       tags: logging
+    - role: routing
+      tags: routing
+    - role: dns
+      tags: dns
+    - role: ntp 
+      tags: ntp

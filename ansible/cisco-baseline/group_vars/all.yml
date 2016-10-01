@@ -2,4 +2,12 @@
 username: "ansible"
 password: "cisco"
 secret: "cisco"
+mgmthost: 192.168.100.131
 logserver: 192.168.100.131
+domain: mydomain.com
+nameserver1: 8.8.8.8
+nameserver2: 8.8.4.4
+ntp1: time1.google.com
+ntp2: time2.google.com
+defaultgwmgmt: 192.168.100.2
+vrfmgmt: vrf-mgmt

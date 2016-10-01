@@ -1,7 +1,7 @@
 ---
-- name: deploys logging configuration 
+- name: deploy ntp configuration
   ios_template:
-    src: logging.j2
+    src: ntp.j2
     username: "{{ username }}"
     password: "{{ password }}"
     host: "{{ device_ip }}"
