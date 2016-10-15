@@ -3,6 +3,10 @@
   remote_user: cumulus
   gather_facts: no
   become: yes
+  vars:
+    ansible_user: "cumulus"
+    ansible_ssh_pass: "CumulusLinux!"
+    ansible_become_pass: "CumulusLinux!"
   tasks:
     - name: Write Hostname 
       shell: echo "{{ ansible_host }}" > /etc/hostname
