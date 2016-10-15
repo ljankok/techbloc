@@ -1,9 +1,0 @@
----
-- name: deploys logging configuration 
-  ios_template:
-    src: logging.j2
-    username: "{{ username }}"
-    password: "{{ password }}"
-    host: "{{ device_ip }}"
-  notify:
-    - write config

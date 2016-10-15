@@ -1,3 +1,0 @@
-[cumulus]
-192.168.100.133 device_hostname=cumulus-01
-192.168.100.134 device_hostname=cumulus-02
