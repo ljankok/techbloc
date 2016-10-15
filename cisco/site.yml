@@ -1,0 +1,17 @@
+- name: Cisco baseline configuration 
+  connection: local
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - role: common
+      tags: common
+    - role: logging
+      tags: logging
+    - role: ntp 
+      tags: ntp
+    - role: routing
+      tags: routing
+    - role: interfaces
+      tags: interfaces
+

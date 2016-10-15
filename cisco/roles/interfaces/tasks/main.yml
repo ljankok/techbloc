@@ -1,0 +1,9 @@
+---
+- name: deploy interface configuration
+  ios_template:
+    src: interfaces.j2
+    username: "{{ username }}"
+    password: "{{ password }}"
+    host: "{{ device_ip }}"
+  notify:
+    - write config
