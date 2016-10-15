@@ -4,7 +4,7 @@
   gather_facts: no
   become: yes
   tasks:
-    - name: Write the Hostname to File
+    - name: Write Hostname 
       shell: echo "{{ ansible_host }}" > /etc/hostname
 
     - name: Apply Hostname
