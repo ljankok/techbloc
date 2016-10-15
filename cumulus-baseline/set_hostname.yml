@@ -7,7 +7,7 @@
     ansible_become_pass: "CumulusLinux!"
   tasks:
     - name: Write the Hostname to File
-      shell: echo "{{ device_hostname }}" > /etc/hostname
+      shell: echo "{{ ansible_host }}" > /etc/hostname
 
     - name: Apply Hostname
       shell: hostname -F /etc/hostname
