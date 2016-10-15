@@ -1,6 +1,6 @@
 - name: Cisco baseline configuration 
   connection: local
-  hosts: ios 
+  hosts: all
   gather_facts: false
 
   roles:
