@@ -1,0 +1,27 @@
+- name: Cisco interface config
+  connection: local
+  hosts: all
+  gather_facts: false
+  vars:
+    cli:
+      username: "{{ username }}"
+      password: "{{ password }}"
+      host: "{{ device_ip }}"
+  tasks:
+  - name: configure IP with loop
+    ios_config:
+      provider: "{{ cli }}"
+      before:
+        - "default interface {{ item.interface }}"
+      lines:
+        - "ip address {{ item.address }} 255.255.255.0"
+      after:
+        - no shutdown
+      parents: "interface {{ item.interface }}"
+    with_items:
+      - { interface : FastEthernet2/0, address : 10.3.3.3 }
+      - { interface : FastEthernet2/1, address : 10.4.4.4 }
+    register: result
+ 
+  - debug: var=result
+
