@@ -1,0 +1,28 @@
+- name: Cisco interface config
+  connection: local
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: configure IP address
+      ios_config:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        host: "{{ device_ip }}"
+        before: 
+          - default interface FastEthernet1/0
+        lines: 
+          - ip address 10.1.1.1 255.255.255.0
+        after: 
+          - no shutdown
+        match: strict
+        parents: interface FastEthernet1/0
+    - name: configure IP out of template
+      ios_config:
+        username: "{{ username }}"
+        password: "{{ password }}"
+        host: "{{ device_ip }}"
+        src: "interfaces.j2"
+      register: result
+    - debug: var=result
+
+
