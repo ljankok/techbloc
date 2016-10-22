@@ -1,3 +1,8 @@
-[ios]
-rtr01 device_ip=192.168.100.145
-# rtr02 device_ip=192.168.100.135
+[switch]
+cosw1 device_ip=192.168.100.201
+cosw2 device_ip=192.168.100.202
+[router]
+rtr1 device_ip=192.168.100.203
+rtr2 device_ip=192.168.100.204
+[firewall]
+fw1 device_ip=192.168.100.205
