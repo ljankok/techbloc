@@ -1,6 +1,6 @@
 - name: Cisco interface config
   connection: local
-  hosts: all
+  hosts: router
   gather_facts: false
   vars:
     cli:
