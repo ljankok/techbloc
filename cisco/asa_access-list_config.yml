@@ -8,7 +8,7 @@
       password: "{{ password }}"
       host: "{{ device_ip }}"
       authorize: yes
-      auth_pass: cisco
+      auth_pass: "{{ secret }}"
   tasks:
     - name: create object group
       asa_config:
