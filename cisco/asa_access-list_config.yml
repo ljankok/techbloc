@@ -30,7 +30,7 @@
         match: strict
         replace: block
         provider: "{{ cli }}" 
-      register: result
+#      register: result
 
     - debug: var=result
 
