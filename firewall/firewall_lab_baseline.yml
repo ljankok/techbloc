@@ -1,0 +1,69 @@
+- name: Deploy firewall lab configuration part 1
+  connection: local
+  hosts: router
+  gather_facts: false
+  vars:
+    cli:
+      username: "{{ username }}"
+      password: "{{ password }}"
+      host: "{{ device_ip }}"
+  tasks:
+    - name: deploy inside router configuration
+      when: ansible_host not in "outside"
+      ios_config:
+        provider: "{{ cli }}"
+        before:
+          - "default interface {{ item.interface }}"
+        lines:
+          - "ip address {{ item.address }}"
+        after:
+          - no shutdown
+        parents: "interface {{ item.interface }}"
+        match: strict
+      with_items:
+        - { interface : Ethernet0/0, address : "{{ eth_00_ip }} {{ eth_00_mask }}" }
+        - { interface : Ethernet0/1, address : "{{ eth_01_ip }} {{ eth_01_mask }}" }
+    - name: deploy outside router configuration
+      when: ansible_host not in "inside,dmz"
+      ios_config:
+        provider: "{{ cli }}"
+        before:
+          - "default interface {{ item.interface }}"
+        lines:
+          - "ip address {{ item.address }}"
+        after:
+          - no shutdown
+        parents: "interface {{ item.interface }}"
+        match: strict
+      with_items:
+        - { interface : Ethernet0/0, address : "{{ eth_00_ip }} {{ eth_00_mask }}" }
+        - { interface : Ethernet0/1, address : "{{ eth_01_ip }}" }
+
+- name: Deploy firewall lab configuration part 2
+  connection: local
+  hosts: firewall
+  gather_facts: false
+  vars:
+    cli:
+      username: "{{ username }}"
+      password: "{{ password }}"
+      host: "{{ device_ip }}"
+      authorize: yes
+      auth_pass: "{{ secret }}"
+  tasks:
+    - name: deploy firewall configuration
+      when: ansible_host not in "inside,dmz,outside"
+      asa_config:
+        provider: "{{ cli }}"
+        authorize: yes
+        lines:
+          - "nameif {{ item.nameif }}"
+          - "ip address {{ item.address }}"
+        after:
+          - no shutdown
+        parents: "interface {{ item.interface }}"
+        match: line
+      with_items:
+        - { interface : GigabitEthernet0/0, nameif : "{{ eth_00_nameif }}", address : "{{ eth_00_ip }} {{ eth_00_mask }}" }
+        - { interface : GigabitEthernet0/1, nameif : "{{ eth_01_nameif }}", address : "{{ eth_01_ip }} {{ eth_01_mask }}" }
+        - { interface : GigabitEthernet0/2, nameif : "{{ eth_02_nameif }}", address : "{{ eth_02_ip }} {{ eth_02_mask }}" }
