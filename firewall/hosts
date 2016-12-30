@@ -3,4 +3,4 @@ inside device_ip=192.168.100.201 eth_00_ip=10.1.255.2 eth_00_mask=255.255.255.24
 dmz device_ip=192.168.100.202 eth_00_ip=10.1.255.34 eth_00_mask=255.255.255.240 eth_01_ip=10.1.1.254 eth_01_mask=255.255.255.0
 outside device_ip=192.168.100.203 eth_00_ip=217.110.110.254 eth_00_mask=255.255.255.0 eth_01_ip=dhcp eth_01_mask=
 [firewall]
-firewall device_ip=192.168.100.204 eth_00_nameif=inside eth_00_ip=10.1.255.1 eth_00_mask=255.255.255.240 eth_01_nameif=dmz eth_01_ip=10.1.255.34 eth_01_mask=255.255.255.240 eth_02_nameif=outside eth_02_ip=217.110.110.1 eth_02_mask=255.255.255.0
+firewall device_ip=192.168.100.204 eth_00_nameif=inside eth_00_ip=10.1.255.1 eth_00_mask=255.255.255.240 eth_01_nameif=dmz eth_01_ip=10.1.255.33 eth_01_mask=255.255.255.240 eth_02_nameif=outside eth_02_ip=217.110.110.1 eth_02_mask=255.255.255.0
