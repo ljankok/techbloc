@@ -1,0 +1,29 @@
+## File Managed by Ansible ##
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0
+    address {{ mgmt_ip }}/24
+    gateway {{ mgmt_gw }}
+
+# Peerlink
+auto peerlink
+iface peerlink
+    bond-slaves {{ peerlink_port }}
+
+auto peerlink.{{ peerlink_vlan }}
+iface peerlink.{{ peerlink_vlan }}
+    address {{ peerlink_address }}
+    clagd-peer-ip {{ clagd_peer }}
+    clagd-sys-mac {{ clagd_mac }}
+
+{% for item in spine_interfaces %}
+auto {{ item.port }}
+iface {{ item.port }}
+    alias {{ item.desc }}
+
+{% endfor %}

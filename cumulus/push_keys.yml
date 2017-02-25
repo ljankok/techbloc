@@ -1,5 +1,5 @@
 ---
-- hosts: cumulus # Run this against all Hosts in the ansible inventory file
+- hosts: all # Run this against all Hosts in the ansible inventory file
   become: yes           # Becomes the Root user during execution on the remote device
   remote_user: cumulus  # Specifying the Remote User used for SSH
   gather_facts: no      # Don't query the remote node for any identifying information before running tasks

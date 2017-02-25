@@ -1,3 +1,6 @@
-[cumulus]
-192.168.100.133 device_hostname=cumulus-01
-192.168.100.134 device_hostname=cumulus-02
+[spine]
+spine-1 mgmt_ip=192.168.100.205 peerlink_address=169.254.1.1/30 clagd_peer=169.254.1.2
+spine-2 mgmt_ip=192.168.100.206 peerlink_address=169.254.1.2/30 clagd_peer=169.254.1.1
+[leaf]
+leaf-1 mgmt_ip=192.168.100.207
+leaf-2 mgmt_ip=192.168.100.208

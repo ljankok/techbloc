@@ -1,0 +1,29 @@
+---
+- hosts: all
+  remote_user: cumulus
+  gather_facts: no
+  become: yes
+  vars:
+    ansible_become_pass: "CumulusLinux!"
+    mgmt_gw: "192.168.100.2"
+    peerlink_port: "swp6"
+    peerlink_vlan: "4094"
+    clagd_mac: "44:38:39:FF:40:94"
+    spine_interfaces:
+      - { desc: leaf-1, port: swp1 }
+      - { desc: leaf-2, port: swp2 }
+    leaf_interfaces:
+      - { desc: spine-1, port: swp1 }
+      - { desc: spine-2, port: swp2 }
+  handlers:
+    - name: ifreload
+      command: ifreload -a
+  tasks:
+    - name: deploys spine interface configuration
+      template: src=spine_interfaces.j2 dest=/etc/network/interfaces
+      when: "'spine' in group_names"
+      notify: ifreload
+    - name: deploys leaf interface configuration
+      template: src=leaf_interfaces.j2 dest=/etc/network/interfaces
+      when: "'leaf' in group_names"
+      notify: ifreload
