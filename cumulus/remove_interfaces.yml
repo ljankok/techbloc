@@ -1,0 +1,16 @@
+---
+- hosts: all
+  remote_user: cumulus
+  gather_facts: no
+  become: yes
+  vars:
+    ansible_become_pass: "CumulusLinux!"
+    mgmt_gw: "192.168.100.2"
+  handlers:
+    - name: ifreload
+      command: ifreload -a
+  tasks:
+    - name: deploys default interface configuration
+      template: src=remove_interfaces.j2 dest=/etc/network/interfaces
+      notify: ifreload
+
