@@ -1,6 +1,6 @@
 [spine]
-spine-1 mgmt_ip=192.168.100.205 peerlink_address=169.254.1.1/30 clagd_peer=169.254.1.2
-spine-2 mgmt_ip=192.168.100.206 peerlink_address=169.254.1.2/30 clagd_peer=169.254.1.1
+spine-1 mgmt_ip=192.168.100.205 peerlink_address=169.254.1.1/30 clagd_peer=169.254.1.2 clagd_backup=192.168.100.206 vlan100_address=10.1.0.252/24 vlan101_address=10.1.1.252/24 vlan102_address=10.1.2.252/24
+spine-2 mgmt_ip=192.168.100.206 peerlink_address=169.254.1.2/30 clagd_peer=169.254.1.1 clagd_backup=192.168.100.205 vlan100_address=10.1.0.253/24 vlan101_address=10.1.1.253/24 vlan102_address=10.1.2.253/24
 [leaf]
-leaf-1 mgmt_ip=192.168.100.207
+leaf-1 mgmt_ip=192.168.100.207 
 leaf-2 mgmt_ip=192.168.100.208

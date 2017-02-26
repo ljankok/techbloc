@@ -1,4 +1,4 @@
-## File Managed by Ansible ##
+## File managed by Ansible ##
 
 # The loopback network interface
 auto lo
@@ -11,8 +11,25 @@ iface eth0
     gateway {{ mgmt_gw }}
 
 {% for item in leaf_interfaces %}
+auto {{ item.clag }}
+iface {{ item.clag }}
+    alias {{ item.desc }}
+    bond-slaves {{ item.port }}
+
+{% endfor %}
+
+{% for item in leaf_access_interfaces %}
 auto {{ item.port }}
 iface {{ item.port }}
     alias {{ item.desc }}
+    bridge-access {{ item.vlan }}
 
 {% endfor %}
+
+auto bridge
+iface bridge
+      bridge-vlan-aware yes
+      bridge-ports {{ leaf_bridge_ports }}
+      bridge-stp on
+      bridge-vids {{ bridge_vlans }}
+

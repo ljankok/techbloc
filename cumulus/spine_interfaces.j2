@@ -1,4 +1,4 @@
-## File Managed by Ansible ##
+## File managed by Ansible ##
 
 # The loopback network interface
 auto lo
@@ -19,11 +19,36 @@ auto peerlink.{{ peerlink_vlan }}
 iface peerlink.{{ peerlink_vlan }}
     address {{ peerlink_address }}
     clagd-peer-ip {{ clagd_peer }}
+    clagd-backup-ip {{ clagd_backup }}
     clagd-sys-mac {{ clagd_mac }}
 
 {% for item in spine_interfaces %}
-auto {{ item.port }}
-iface {{ item.port }}
+auto {{ item.clag }}
+iface {{ item.clag }}
     alias {{ item.desc }}
+    bond-slaves {{ item.port }}
+    clag-id {{ item.clagid }}
 
 {% endfor %}
+
+auto bridge
+iface bridge
+      bridge-vlan-aware yes
+      bridge-ports {{ spine_bridge_ports }} 
+      bridge-stp on
+      bridge-vids {{ bridge_vlans }}
+
+auto {{ spine_vrf }}
+iface {{ spine_vrf }}
+    vrf-table auto
+
+{% for item in spine_bridge %}
+auto bridge.{{ item.vlan }}
+iface bridge.{{ item.vlan }}
+    alias {{ item.desc }}
+    address {{ item.address }}
+    address-virtual {{ item.address_virtual }}
+    vrf {{ item.vrf }}
+
+{% endfor %}
+
